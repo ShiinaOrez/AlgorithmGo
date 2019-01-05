@@ -3,6 +3,7 @@ package main
 import (
     _"github.com/ShiinaOrez/AlgorithmGo/typedefs"
     "github.com/ShiinaOrez/AlgorithmGo/stack"
+    "github.com/ShiinaOrez/AlgorithmGo/queue"
     "github.com/ShiinaOrez/AlgorithmGo/heap"
     "fmt"
 )
@@ -18,6 +19,19 @@ func main() {
     for !stk.Empty() {
         fmt.Printf("%d ", stk.Peek())
         stk.Pop()
+    }
+    fmt.Printf("\n------\n")
+
+    /*Queue Test**/
+    fmt.Printf("Queue Test:\n")
+    quq := new(queue.Queue)
+    var q queue.Type
+    for q = 0; q<=8; q++ {
+        quq.Push(q)
+    }
+    for !quq.Empty() {
+        fmt.Printf("%d ", quq.Peek())
+        quq.Pop()
     }
     fmt.Printf("\n------\n")
 
