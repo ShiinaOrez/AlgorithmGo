@@ -2,7 +2,6 @@
 package heap
 
 import (
-	"fmt"
 	"github.com/ShiinaOrez/AlgorithmGo/stack"
 	"github.com/ShiinaOrez/AlgorithmGo/typedefs"
 )
@@ -178,11 +177,12 @@ func (heap *Heap) Push (value Type, comp func(Type, Type) bool) int {
 	return heap.Size
 }
 
-func (heap *Heap) Sort (comp func(Type, Type) bool) {
+func (heap *Heap) Sort (comp func(Type, Type) bool) []Type{
 	size := heap.Size
+	var res []Type
 	for i := 1; i <= size; i++ {
-		fmt.Printf("%d ",heap.Peek())
+		res = append(res, heap.Peek())
 		heap.Pop(comp)
 	}
-	fmt.Println()
+	return res
 }

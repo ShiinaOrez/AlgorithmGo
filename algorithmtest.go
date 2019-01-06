@@ -5,6 +5,7 @@ import (
     "github.com/ShiinaOrez/AlgorithmGo/stack"
     "github.com/ShiinaOrez/AlgorithmGo/queue"
     "github.com/ShiinaOrez/AlgorithmGo/heap"
+    "github.com/ShiinaOrez/AlgorithmGo/bstree"
     "fmt"
 )
 
@@ -45,5 +46,22 @@ func main() {
     for j = 20; j>=11; j-- {
         h.Push(j, func (a heap.Type, b heap.Type) bool {return a < b;})
     }
-    h.Sort(func (a heap.Type, b heap.Type) bool {return a < b;})
+    heapres := h.Sort(func (a heap.Type, b heap.Type) bool {return a < b;})
+    for _, v := range(heapres) { fmt.Printf("%d ", v) }
+    fmt.Printf("\n------\n")
+
+    /*Binary Sort Tree Test**/
+    fmt.Printf("BinarySortTree Test:\n")
+    bst := new(bstree.BSTree)
+    var u bstree.Type
+    for u = 0; u<=10; u++ {
+        bst.Push(u, func (a bstree.Type, b bstree.Type) bool {return a < b;})
+    }
+    for u = 20; u>=11; u-- {
+        bst.Push(u, func (a bstree.Type, b bstree.Type) bool {return a < b;})
+    }
+    res := bst.Sort()
+    for _, v := range(res) { fmt.Printf("%d ", v) }
+    fmt.Printf("\n------\n")
+
 }
