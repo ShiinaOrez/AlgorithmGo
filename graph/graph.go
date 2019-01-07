@@ -2,6 +2,7 @@ package graph
 
 import (
 	"github.com/ShiinaOrez/AlgorithmGo/typedefs"
+	_"github.com/ShiinaOrez/AlgorithmGo/queue"
 )
 
 type Type typedefs.GraphType
@@ -9,33 +10,26 @@ type Type typedefs.GraphType
 type GraphNode struct {
 	Index  int
 	Value  Type
-	In     [] *GraphNode
-	Out    [] *GraphNode
+	In     BSTree
+	Out    BSTree
 }
 
 type Graph struct {
-	Nodes  [] *GraphNode
+	NodeTree BSTree
 	Size   int
 }
 
 func (g *Graph) HasNode(index int) bool {
-	for _, node := range(g.Nodes) {
-		if node.Index == index {
-			return true
-		}
+	if g.NodeTree.Find(index) != nil {
+		return true
 	}
 	return false
 }
 
 func (g *Graph) Related(from int, to int) bool {
-	for _, node := range(g.Nodes) {
-		if node.Index == from {
-			for _, t := range(node.Out) {
-				if t.Index == to {
-					return true
-				}
-			}
-			break
+	if node := g.NodeTree.Find(from); node != nil {
+		if node.Out.Find(to) != nil {
+			return true
 		}
 	}
 	return false
@@ -48,7 +42,7 @@ func (g *Graph) Insert(index int, value Type) bool {
 	node := new(GraphNode)
 	node.Value = value
 	node.Index = index
-	g.Nodes = append(g.Nodes, node)
+	g.NodeTree.Push(node)
 	g.Size += 1
 	return true
 }
@@ -60,21 +54,10 @@ func (g *Graph) Relate(from int, to int) bool {
 	if g.Related(from, to) {
 		return false
 	}else{
-		var FROM *GraphNode
-		var TO *GraphNode
-		for _, node := range(g.Nodes) {
-			if node.Index == from {
-				FROM = node
-			}
-			if node.Index == to {
-				TO = node
-			}
-			if FROM != nil && TO != nil {
-				break
-			}
-		}
-		FROM.Out = append(FROM.Out, TO)
-		TO.In = append(TO.In, FROM)
+		FROM := g.NodeTree.Find(from)
+		TO := g.NodeTree.Find(to)
+		FROM.Out.Push(TO)
+		TO.In.Push(FROM)
 		return true
 	}
 }

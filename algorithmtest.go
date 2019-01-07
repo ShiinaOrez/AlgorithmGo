@@ -6,7 +6,9 @@ import (
     "github.com/ShiinaOrez/AlgorithmGo/queue"
     "github.com/ShiinaOrez/AlgorithmGo/heap"
     "github.com/ShiinaOrez/AlgorithmGo/bstree"
+    "github.com/ShiinaOrez/AlgorithmGo/graph"
     "fmt"
+    _"reflect"
 )
 
 func main() {
@@ -50,6 +52,10 @@ func main() {
     for _, v := range(heapres) { fmt.Printf("%d ", v) }
     fmt.Printf("\n------\n")
 
+    type I interface {
+        Comp(*bstree.BSTree)  bool
+    }
+
     /*Binary Sort Tree Test**/
     fmt.Printf("BinarySortTree Test:\n")
     bst := new(bstree.BSTree)
@@ -64,4 +70,12 @@ func main() {
     for _, v := range(res) { fmt.Printf("%d ", v) }
     fmt.Printf("\n------\n")
 
+    /*Graph Test**/
+    fmt.Printf("Graph Test:\n")
+    g := new(graph.Graph)
+    g.Insert(15, 3); g.Insert(2, 4); g.Insert(30, 1); g.Insert(22, 16)
+    fmt.Println(g.Related(2, 30))
+    g.Relate(2, 30)
+    fmt.Println(g.Related(2, 30))
+    fmt.Println(g.NodeTree.Find(2))
 }

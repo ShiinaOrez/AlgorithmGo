@@ -1,15 +1,9 @@
-package bstree
-
-import (
-	"github.com/ShiinaOrez/AlgorithmGo/typedefs"
-)
-
-type Type typedefs.BSTreeType
+package graph
 
 type BSTreeNode struct {
 	LeftNode  *BSTreeNode
 	RightNode *BSTreeNode
-	Value     Type
+	Value     *GraphNode
 }
 
 type BSTree struct {
@@ -22,10 +16,10 @@ func BuildNode () *BSTreeNode {
 }
 
 func (node *BSTreeNode) Comp(other *BSTreeNode) bool {
-	return node.Value < other.Value
+	return node.Value.Index < other.Value.Index
 }
 
-func (tree *BSTree) Push(value Type, comp func(Type, Type) bool) int {
+func (tree *BSTree) Push(value *GraphNode) int {
 	if (tree.Size == 0) || (tree.Root == nil) {
 		tree.Root = BuildNode()
 		tree.Root.Value = value
@@ -34,7 +28,7 @@ func (tree *BSTree) Push(value Type, comp func(Type, Type) bool) int {
 	}else{
 		now := tree.Root
 		for now != nil {
-			if comp(value, now.Value) {
+			if value.Index < now.Value.Index {
 				if now.LeftNode != nil {
 					now = now.LeftNode
 				}else{
@@ -68,28 +62,18 @@ func (now *BSTreeNode) Traversal(res []BSTreeNode) []BSTreeNode {
 	return res
 }
 
-func (tree *BSTree) Find(target Type, comp func(Type, Type) bool) bool {
+func (tree *BSTree) Find(index int) *GraphNode {
 	now := tree.Root
 	for now != nil {
-		if now.Value == target {
-			return true
+		if now.Value.Index == index {
+			return now.Value
 		}else{
-			if comp(target, now.Value) {
+			if index < now.Value.Index {
 				now = now.LeftNode
 			}else{
 				now = now.RightNode
 			}
 		}
 	}
-	return false
-} 
-
-func (tree *BSTree) Sort() []Type{
-	var res []Type
-	var rv []BSTreeNode
-	rv = tree.Root.Traversal(rv)
-	for _, node := range(rv) {
-		res = append(res, node.Value)
-	}
-	return res
+	return nil
 }
