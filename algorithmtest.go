@@ -1,14 +1,15 @@
 package main
 
 import (
-    _"github.com/ShiinaOrez/AlgorithmGo/typedefs"
-    "github.com/ShiinaOrez/AlgorithmGo/stack"
-    "github.com/ShiinaOrez/AlgorithmGo/queue"
-    "github.com/ShiinaOrez/AlgorithmGo/heap"
+    "fmt"
     "github.com/ShiinaOrez/AlgorithmGo/bstree"
     "github.com/ShiinaOrez/AlgorithmGo/graph"
-    "fmt"
-    _"reflect"
+    "github.com/ShiinaOrez/AlgorithmGo/heap"
+    "github.com/ShiinaOrez/AlgorithmGo/queue"
+    "github.com/ShiinaOrez/AlgorithmGo/stack"
+    "github.com/ShiinaOrez/AlgorithmGo/stringmatch"
+    _ "github.com/ShiinaOrez/AlgorithmGo/typedefs"
+    _ "reflect"
 )
 
 func main() {
@@ -78,4 +79,13 @@ func main() {
     g.Relate(2, 30)
     fmt.Println(g.Related(2, 30))
     fmt.Println(g.NodeTree.Find(2))
+
+    master := "abc in abcd"
+    temp := "n"
+    exist, pos := stringmatch.Naive(master, temp)
+    fmt.Println(exist, pos)
+    exist, pos = stringmatch.Kmp(master, temp)
+    fmt.Println(exist, pos)
+    exist, pos = stringmatch.BoyerMoore(master, temp)
+    fmt.Println(exist, pos)
 }

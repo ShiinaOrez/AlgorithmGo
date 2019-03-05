@@ -12,8 +12,8 @@ type DijkstraArg interface {
 	getNode( *Graph)   *GraphNode
 }
 
-func (g *Graph) Dijkstra(from, to DijkstraArg) Type {
-	source := from.getNode(g)
-	target := to.getNode(g)
+//func (g *Graph) Dijkstra(from, to DijkstraArg) Type {
+//	source := from.getNode(g)
+//	target := to.getNode(g)
 	
-}
+//}
