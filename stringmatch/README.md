@@ -18,7 +18,7 @@ In order to compare the performance of these three algorithm, I write this go pa
 
 #### Function: KMP(master, temp string) (find bool, pos int);
 
-#### Function: Boyer-Moore(master, temp string) (find bool, pos int);
+#### Function: BoyerMoore(master, temp string) (find bool, pos int);
 
 -----
 
