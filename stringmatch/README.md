@@ -2,11 +2,11 @@
 
 -----
 
-Algorithm.stringmatch provide three different algorithm to match the partten(or template) string in master string. It's **Naive** algorithm(or BF), **KMP** algorithm and the **Boyer-Moore** algorithm.
+Algorithm.stringmatch provide three different algorithm to match the pattern(or template) string in master string. It's **Naive** algorithm(or BF), **KMP** algorithm and the **Boyer-Moore** algorithm.
 
 Obviously these algorithm's performance is incremental: BM faster than KMP faster than Naive.
 
-In order to compare the performance of these three algorithm, I wirte this go package. But I didn't give you the function which compare these algorithm's performance. I hope you do it yourself.
+In order to compare the performance of these three algorithm, I write this go package. But I didn't give you the function which compare these algorithm's performance. I hope you do it yourself.
 
 -----
 
