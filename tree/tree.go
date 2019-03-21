@@ -79,13 +79,17 @@ func (node *Node) CleanLinks() error {
 func (node *Node) LinkTo(to *Node) error {
     if node.Belong == to.Belong && node.Belong != nil {
         if to.In(node.LinkNodes) {
-
+            return errors.New("[Error]: Nodes already linked.")
+        } else {
+            node.LinkNodes = append(node.LinkNodes, to)
+            return nil
         }
     } else if node.Belong == nil || to.Belong == nil {
         return errors.New("[Error]: Nodes must belong to a tree.")
     } else if node.Belong != to.Belong {
         return errors.New("[Error]: Nodes must belong to a same tree!")
     }
+    return nil
 }
 
 func (node *Node) In(sli []*Node) bool{

@@ -9,6 +9,7 @@ import (
     "github.com/ShiinaOrez/AlgorithmGo/stack"
     "github.com/ShiinaOrez/AlgorithmGo/stringmatch"
     _ "github.com/ShiinaOrez/AlgorithmGo/typedefs"
+    "github.com/ShiinaOrez/AlgorithmGo/test"
     _ "reflect"
 )
 
@@ -88,4 +89,6 @@ func main() {
     fmt.Println(exist, pos)
     exist, pos = stringmatch.BoyerMoore(master, temp)
     fmt.Println(exist, pos)
+
+    algorithmtest.RunTest()
 }

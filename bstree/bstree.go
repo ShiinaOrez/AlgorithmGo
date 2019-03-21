@@ -84,7 +84,7 @@ func (tree *BSTree) Find(target Type, comp func(Type, Type) bool) bool {
 	return false
 } 
 
-func (tree *BSTree) Range() []Type{
+func (tree *BSTree) Sort() []Type{
 	var res []Type
 	var rv []BSTreeNode
 	rv = tree.Root.Traversal(rv)
