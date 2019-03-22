@@ -34,10 +34,10 @@ func CreateTree() *Tree {
 func (tree *Tree) SetRootNode(node *Node) error {
     if node.Belong == tree{
         tree.Root = node
-    } else {
         return nil
+    } else {
+        return errors.New("[Error]: Node must in this tree!")
     }
-    return errors.New("[Error]: Node must in this tree!")
 }
 
 // JoinTree
@@ -52,7 +52,7 @@ func (node *Node) JoinTree(tree *Tree) error {
                 return errors.New("[Error]: Delete node from tree failed!")
             }
         }
-        node.Belong = tree
+        (*node).Belong = tree
         tree.Size += 1
     }
     return nil
@@ -92,11 +92,29 @@ func (node *Node) LinkTo(to *Node) error {
     return nil
 }
 
-func (node *Node) In(sli []*Node) bool{
+func (node *Node) In(sli []*Node) bool {
     for _, per := range sli {
         if per == node {
             return true
         }
     }
     return false
+}
+
+func (node *Node) Range(src []*Node, from *Node) []*Node {
+    for _, nod := range node.LinkNodes {
+        if nod != from {
+            src = append(src, nod)
+            src = nod.Range(src, node)
+        } else {
+            continue
+        }
+    }
+    return src
+}
+
+func (tree *Tree) Range() []*Node {
+    var res []*Node
+    res = tree.Root.Range(res, nil)
+    return res
 }
