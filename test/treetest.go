@@ -27,8 +27,14 @@ func TreeTest() {
     }
     rotNode.LinkTo(sli[0])
     sli[0].LinkTo(rotNode)
-    for _, i := range tre.Range() {
-        fmt.Println(i.Value)
+    resp, _ := tre.Range()
+    for _, i := range resp {
+        fmt.Printf("%d ", i.Value)
+    }
+    fmt.Println()
+    resp, _ = tre.DFS(tre.Root, nil)
+    for _, i := range resp {
+        fmt.Printf("%d ", i.Value)
     }
 }
 
