@@ -36,6 +36,11 @@ func TreeTest() {
     for _, i := range resp {
         fmt.Printf("%d ", i.Value)
     }
+    resp, _ = tre.BFS()
+    fmt.Println()
+    for _, i := range resp {
+        fmt.Printf("%d ", i.Value)
+    }
 }
 
 func CheckErr (err error) {
