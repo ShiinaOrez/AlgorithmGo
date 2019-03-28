@@ -90,20 +90,42 @@ func (node *Node) GetRangeSum(r [2]int) (Type, error) {
 			if r[0] == node.Range[0] && r[1] == node.Range[1] {
 				return node.Value, nil
 			} else {
-
+				mid := node.Left.Range[1]
+				if r[0] > mid {
+					return node.Right.GetRangeSum(r)
+				} else if r[1] < mid + 1 {
+					return node.Left.GetRangeSum(r)
+				} else {
+					leftSum, err := node.Left.GetRangeSum([2]int{r[0], mid})
+					if err != nil {
+						return 0, err
+					}
+					rightSum, err := node.Right.GetRangeSum([2]int{mid+1, r[1]})
+					if err != nil {
+						return 0, err
+					}
+					return leftSum + rightSum, nil
+				}
 			}
 		}
 	}
+	return 0, errors.New("[Error]: Something error internal.")
 }
 
 func (tree *SegmentTree) Query(r [2]int) (Type, error) {
+	var res Type
 	if tree.Root == nil {
 		return 0, errors.New("[Error]: Tree haven't init!")
 	} else {
 		if tree.Root.Range[0] > r[0] || tree.Root.Range[1] < r[1] {
 			return 0, errors.New("[Error]: Out of range!")
 		} else {
-			res, err := tree.Root.GetRangeSum(r)
+			var err error
+			res, err = tree.Root.GetRangeSum(r)
+			if err != nil {
+				return 0, err
+			}
 		}
 	}
+	return res, nil
 }
