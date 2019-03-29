@@ -1,4 +1,3 @@
-[TOC]
 ## Algorithm & Data structure by Golang
 
 Package **AlgorithmGo** is the set of algorithm and data structure. Very bisic and simple.
