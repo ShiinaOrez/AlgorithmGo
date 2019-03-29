@@ -41,6 +41,7 @@ func TreeTest() {
     for _, i := range resp {
         fmt.Printf("%d ", i.Value)
     }
+    fmt.Println()
 }
 
 func CheckErr (err error) {

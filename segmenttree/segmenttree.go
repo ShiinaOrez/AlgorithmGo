@@ -41,7 +41,7 @@ func (node *Node) Set(from *Node, sli []Type, r [2]int) (Type, error) {
 			}
 		} else {
 			var mid int
-			mid = (node.Range[0] + node.Range[1]) / 2
+			mid = (node.Range[1] - node.Range[0]) / 2
 			node.Left = BuildNode()
 			node.Right = BuildNode()
 			leftSum, err := node.Left.Set(node, sli[:mid+1], [2]int{node.Range[0], node.Range[0] + mid})
