@@ -20,4 +20,23 @@ func SegmentTreeTest() {
 	} else {
 		fmt.Println(res)
 	}
+	tree.ItemAddValue(5, 10)
+	fmt.Print(" [1->5]Sum:")
+	res, err = tree.Query([2]int{1, 5})
+	if err != nil {
+		log.Fatalln(err)
+	} else {
+		fmt.Println(res)
+	}
+	err = tree.RangeAddSameValue([2]int{5, 7}, 3)
+	if err != nil{
+		log.Fatalln(err)
+	}
+	fmt.Print(" [1->5]Sum:")
+	res, err = tree.Query([2]int{1, 5})
+	if err != nil {
+		log.Fatalln(err)
+	} else {
+		fmt.Println(res)
+	}
 }

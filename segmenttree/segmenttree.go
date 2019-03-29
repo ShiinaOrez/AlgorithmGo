@@ -2,9 +2,8 @@ package segmenttree
 
 import (
 	"errors"
+	"fmt"
 	"github.com/ShiinaOrez/AlgorithmGo/typedefs"
-	"github.com/kataras/golog"
-	"github.com/ogier/pflag"
 )
 
 type Type typedefs.SegmentTreeType
@@ -67,7 +66,7 @@ func (tree *SegmentTree) Init(sli []Type) error {
 	if tree.Root == nil {
 		tree.Root = BuildNode()
 	}
-	_, err := tree.Root.Set(nil, sli, [2]int{0, len(sli)})
+	_, err := tree.Root.Set(nil, sli, [2]int{0, len(sli)-1})
 	if err != nil {
 		return err
 	}
@@ -187,7 +186,7 @@ func (node *Node) RangeAddSameValue(r [2]int, value Type) error {
 			if err != nil {
 				return err
 			}
-		} else if node.Range[0] <= r[0] {
+		} else if node.Right.Range[0] <= r[0] {
 			err := node.Right.RangeAddSameValue(r, value)
 			if err != nil {
 				return err
@@ -203,6 +202,7 @@ func (node *Node) RangeAddSameValue(r [2]int, value Type) error {
 			}
 		}
 	}
+	return nil
 }
 
 func (tree *SegmentTree) RangeAddSameValue(r [2]int, value Type) error {
@@ -219,4 +219,24 @@ func (tree *SegmentTree) RangeAddSameValue(r [2]int, value Type) error {
 		}
 	}
 	return nil
+}
+
+func (node *Node) Print() {
+	fmt.Printf("[%d - %d]: %d\n", node.Range[0], node.Range[1], node.Value)
+	return
+}
+
+func (node *Node) ShowNode() {
+	node.Print()
+	if node.Left != nil {
+		node.Left.ShowNode()
+	}
+	if node.Right != nil {
+		node.Right.ShowNode()
+	}
+	return
+}
+
+func (tree *SegmentTree) ShowTree() {
+	tree.Root.ShowNode()
 }
