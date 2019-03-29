@@ -1,3 +1,4 @@
+[TOC]
 ## Algorithm & Data structure by Golang
 
 Package **AlgorithmGo** is the set of algorithm and data structure. Very bisic and simple.
@@ -43,6 +44,15 @@ Naive, KMP and BM algorithm, [Click Here](https://github.com/ShiinaOrez/Algorith
 ### Package: unionfindset
 
 Type UnionFindSet and union and find operation, [Click Here](https://github.com/ShiinaOrez/AlgorithmGo/tree/master/unionfindset)
+
+### Package: tree
+
+Type tree and a set of base operations, [Click Here](https://github.com/ShiinaOrez/AlgorithmGo/tree/master/tree)
+
+
+### Package: segmenttree
+
+Type Segment and a set of base operations, [Click Here](https://github.com/ShiinaOrez/AlgorithmGo/tree/master/segmenttree)
 
 ------
 
