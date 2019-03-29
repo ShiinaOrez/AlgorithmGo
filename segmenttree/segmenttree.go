@@ -3,6 +3,8 @@ package segmenttree
 import (
 	"errors"
 	"github.com/ShiinaOrez/AlgorithmGo/typedefs"
+	"github.com/kataras/golog"
+	"github.com/ogier/pflag"
 )
 
 type Type typedefs.SegmentTreeType
@@ -128,4 +130,93 @@ func (tree *SegmentTree) Query(r [2]int) (Type, error) {
 		}
 	}
 	return res, nil
+}
+
+func (node *Node) ItemAddValue(index int, value Type) error {
+	if index < node.Range[0] || index > node.Range[1] {
+		return errors.New("[Error]: Out of range!")
+	} else {
+		node.Value += value
+		if node.Range[0] == node.Range[1] {
+			if node.Range[0] == index {
+				return nil
+			}
+		} else {
+			if index <= node.Left.Range[1] {
+				err := node.Left.ItemAddValue(index, value)
+				if err != nil {
+					return err
+				}
+			} else {
+				err := node.Right.ItemAddValue(index, value)
+				if err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
+}
+
+func (tree *SegmentTree) ItemAddValue(index int, value Type) error {
+	if tree.Root == nil {
+		return errors.New("[Error]: Tree haven't init!")
+	} else {
+		if index < tree.Root.Range[0] || index > tree.Root.Range[1] {
+			return errors.New("[Error]: Out of range!")
+		} else {
+			err := tree.Root.ItemAddValue(index, value)
+			if err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+func (node *Node) RangeAddSameValue(r [2]int, value Type) error {
+	if node.Range[0] > r[0] || node.Range[1] < r[1] {
+		return errors.New("[Error]: Out of range!")
+	} else {
+		node.Value += Type((r[1]-r[0]+1) * int(value))
+		if node.Range[0] == node.Range[1] {
+			return nil
+		}
+		if node.Left.Range[1] >= r[1] {
+			err := node.Left.RangeAddSameValue(r, value)
+			if err != nil {
+				return err
+			}
+		} else if node.Range[0] <= r[0] {
+			err := node.Right.RangeAddSameValue(r, value)
+			if err != nil {
+				return err
+			}
+		} else {
+			err := node.Left.RangeAddSameValue([2]int{r[0], node.Left.Range[1]}, value)
+			if err != nil {
+				return err
+			}
+			err = node.Right.RangeAddSameValue([2]int{node.Right.Range[0], r[1]}, value)
+			if err != nil {
+				return err
+			}
+		}
+	}
+}
+
+func (tree *SegmentTree) RangeAddSameValue(r [2]int, value Type) error {
+	if tree.Root == nil {
+		return errors.New("[Error]: Tree haven't init!")
+	} else {
+		if r[0] < tree.Root.Range[0] || r[1] > tree.Root.Range[1] {
+			return errors.New("[Error]: Out of range.")
+		} else {
+			err := tree.Root.RangeAddSameValue(r, value)
+			if err != nil {
+				return err
+			}
+		}
+	}
+	return nil
 }
