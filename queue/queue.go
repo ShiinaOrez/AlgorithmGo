@@ -2,21 +2,7 @@ package queue
 
 import (
 	_"fmt"
-	"github.com/ShiinaOrez/AlgorithmGo/typedefs"
 )
-
-type Type typedefs.QueueType
-
-type QueueNode struct {
-	Next   *QueueNode
-	Value  Type
-}
-
-type Queue struct {
-	Head   *QueueNode
-	Tail   *QueueNode
-	Size   int
-}
 
 func (queue *Queue) Push (value Type) int {
 	newNode := new(QueueNode)

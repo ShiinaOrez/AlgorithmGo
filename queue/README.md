@@ -4,7 +4,7 @@
 
 This package defines the **queue** data structure, as a kind of linear table, queue's rule is FIFO(First In First Out).
 
-In this package, I just provide you with some simple method like: **Push**, **Pop**, **Peek**, **Empty**. If you want create more new method, please fork my code and edit it.
+In this package, I build two types of queue by links and channel as **Queue** and **ChannelQueue**. I just provide you with some simple method like: **Push**, **Pop**, **Peek**, **Empty**. If you want create more new method, please fork my code and edit it.
 
 -----
 
@@ -18,6 +18,12 @@ In this package, I just provide you with some simple method like: **Push**, **Po
 #### Mehtod: Queue.Pop();
 #### Method: Queue.Peek() element eleType;
 #### Method: Queue.Empty() empty bool;
+
+#### Type: ChannelQueue
+#### Mehtod: ChannelQueue.Push(element eleType) Size int;
+#### Mehtod: ChannelQueue.Pop() eleType;
+#### Method: ChannelQueue.Empty() empty bool;
+#### Method: ChannelQueue.New() *ChannelQueue;
 
 -----
 

@@ -81,8 +81,8 @@ func main() {
     fmt.Println(g.Related(2, 30))
     fmt.Println(g.NodeTree.Find(2))
 
-    master := "abc in abcd"
-    temp := "n"
+    master := "mississippi"
+    temp := "issip"
     exist, pos := stringmatch.Naive(master, temp)
     fmt.Println(exist, pos)
     exist, pos = stringmatch.Kmp(master, temp)
