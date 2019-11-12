@@ -13,10 +13,10 @@ func (queue *ChannelQueue) Push (value Type) int {
 		fmt.Println("[ChannelQueue]: The internal channel is full. Will be updated at next.")
 		queue.Inter = func(origin chan Type) chan Type {
 			newBuffer := make(chan Type, 2*length)
-			for i:=0; i<length; i++ {
-				newBuffer<- <-origin
-			}
 			close(origin)
+			for i := range origin {
+				newBuffer<- i
+			}
 			return newBuffer
 		} (queue.Inter)
 		queue.Inter<- value
