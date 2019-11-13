@@ -14,50 +14,50 @@ type Heap struct {
 }
 
 type HeapNode struct {
-	Father  *HeapNode
-	LeftNode *HeapNode
+	Father    *HeapNode
+	LeftNode  *HeapNode
 	RightNode *HeapNode
-	Value Type
+	Value     Type
 }
 
-func BuildNode () *HeapNode {
-    return new(HeapNode)
+func BuildNode() *HeapNode {
+	return new(HeapNode)
 }
 
-func Heaplify (now *HeapNode, value Type, comp func(Type, Type) bool) {
+func Heaplify(now *HeapNode, value Type, comp func(Type, Type) bool) {
 	var rv Type
-    if comp(value, now.Value) {
+	if comp(value, now.Value) {
 		rv = now.Value
 		now.Value = value
-	}else{
+	} else {
 		rv = value
 	}
 	if now.LeftNode == nil {
 		now.LeftNode = BuildNode()
 		now.LeftNode.Value = rv
 		return
-	}else{
+	} else {
 		if now.RightNode == nil {
 			now.RightNode = BuildNode()
 			now.RightNode.Value = rv
 			return
-		}else{
+		} else {
 			if comp(now.LeftNode.Value, now.RightNode.Value) {
 				Heaplify(now.LeftNode, rv, comp)
-			}else{
+			} else {
 				Heaplify(now.RightNode, rv, comp)
 			}
 		}
 	}
 }
 
-func HeapUp (now *HeapNode, comp func(Type, Type) bool) {
+func HeapUp(now *HeapNode, comp func(Type, Type) bool) {
 	if now.Father == nil {
 		return
-	}else{
+	} else {
 		if comp(now.Father.Value, now.Value) {
 			return
-		}else{
+		} else {
 			now.Father.Value, now.Value = now.Value, now.Father.Value
 			HeapUp(now.Father, comp)
 			return
@@ -65,7 +65,7 @@ func HeapUp (now *HeapNode, comp func(Type, Type) bool) {
 	}
 }
 
-func HeapDown (now *HeapNode, comp func(Type, Type) bool) {
+func HeapDown(now *HeapNode, comp func(Type, Type) bool) {
 	if (now.LeftNode == nil) && (now.RightNode == nil) {
 		return
 	}
@@ -73,16 +73,16 @@ func HeapDown (now *HeapNode, comp func(Type, Type) bool) {
 		if comp(now.LeftNode.Value, now.RightNode.Value) {
 			now.Value, now.LeftNode.Value = now.LeftNode.Value, now.Value
 			HeapDown(now.LeftNode, comp)
-		}else{
+		} else {
 			now.Value, now.RightNode.Value = now.RightNode.Value, now.Value
 			HeapDown(now.RightNode, comp)
 		}
-	}else{
+	} else {
 		if (now.RightNode == nil) && comp(now.LeftNode.Value, now.Value) {
 			now.Value, now.LeftNode.Value = now.LeftNode.Value, now.Value
 			HeapDown(now.LeftNode, comp)
 		}
-		if (now.LeftNode == nil) && comp(now.RightNode.Value, now.Value){
+		if (now.LeftNode == nil) && comp(now.RightNode.Value, now.Value) {
 			now.Value, now.RightNode.Value = now.RightNode.Value, now.Value
 			HeapDown(now.RightNode, comp)
 		}
@@ -90,11 +90,11 @@ func HeapDown (now *HeapNode, comp func(Type, Type) bool) {
 	return
 }
 
-func (heap *Heap) Pop (comp func(Type, Type) bool) {
+func (heap *Heap) Pop(comp func(Type, Type) bool) {
 	if heap.Size <= 0 {
 		return
-	}else{
-		if heap.Size == 1{
+	} else {
+		if heap.Size == 1 {
 			heap.Root = nil
 			heap.Size = 0
 			return
@@ -102,7 +102,7 @@ func (heap *Heap) Pop (comp func(Type, Type) bool) {
 		stk := new(stack.Stack)
 		num := heap.Size
 		for num > 0 {
-			stk.Push(stack.Type(num&1))
+			stk.Push(stack.Type(num & 1))
 			num /= 2
 		}
 		now := heap.Root
@@ -112,14 +112,14 @@ func (heap *Heap) Pop (comp func(Type, Type) bool) {
 				if stk.Peek() == 1 {
 					heap.Root.Value = now.RightNode.Value
 					now.RightNode = nil
-				}else{
+				} else {
 					heap.Root.Value = now.LeftNode.Value
 					now.LeftNode = nil
 				}
 			}
-			if stk.Peek() == 1{
+			if stk.Peek() == 1 {
 				now = now.RightNode
-			}else{
+			} else {
 				now = now.LeftNode
 			}
 			stk.Pop()
@@ -130,26 +130,26 @@ func (heap *Heap) Pop (comp func(Type, Type) bool) {
 	return
 }
 
-func (heap *Heap) Peek () Type {
-    if heap.Root == nil{
+func (heap *Heap) Peek() Type {
+	if heap.Root == nil {
 		return *new(Type)
-	}else{
+	} else {
 		return heap.Root.Value
 	}
 }
 
-func (heap *Heap) Push (value Type, comp func(Type, Type) bool) int {
+func (heap *Heap) Push(value Type, comp func(Type, Type) bool) int {
 	heap.Size += 1
 	if heap.Root == nil {
 		heap.Root = BuildNode()
 		heap.Size = 1
 		heap.Root.Value = value
 		return heap.Size
-	}else{
+	} else {
 		stk := new(stack.Stack)
 		num := heap.Size
 		for num > 0 {
-			stk.Push(stack.Type(num&1))
+			stk.Push(stack.Type(num & 1))
 			num /= 2
 		}
 		now := heap.Root
@@ -159,14 +159,14 @@ func (heap *Heap) Push (value Type, comp func(Type, Type) bool) int {
 				if stk.Peek() == 1 {
 					now.RightNode = new(HeapNode)
 					now.RightNode.Father = now
-				}else{
+				} else {
 					now.LeftNode = new(HeapNode)
 					now.LeftNode.Father = now
 				}
 			}
-			if stk.Peek() == 1{
+			if stk.Peek() == 1 {
 				now = now.RightNode
-			}else{
+			} else {
 				now = now.LeftNode
 			}
 			stk.Pop()
@@ -177,7 +177,7 @@ func (heap *Heap) Push (value Type, comp func(Type, Type) bool) int {
 	return heap.Size
 }
 
-func (heap *Heap) Sort (comp func(Type, Type) bool) []Type{
+func (heap *Heap) Sort(comp func(Type, Type) bool) []Type {
 	size := heap.Size
 	var res []Type
 	for i := 1; i <= size; i++ {

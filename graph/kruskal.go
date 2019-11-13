@@ -15,7 +15,7 @@ func (g *Graph) MST() *Graph {
 		mst.NodeTree = g.NodeTree
 		ufs := new(unionfindset.UnionFindSet)
 		sort.Sort(g.ArcSli)
-		for _, arc := range(g.ArcSli) {
+		for _, arc := range g.ArcSli {
 			if len(mst.ArcSli) == mst.Size-1 {
 				break
 			}

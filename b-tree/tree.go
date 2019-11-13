@@ -6,14 +6,14 @@ import (
 
 func NewNode(leaf bool) *Node {
 	return &Node{
-		Leaf: leaf,
+		Leaf:  leaf,
 		Nodes: make([]*Node, T+1),
 	}
 }
 
 func NewBTree() *Tree {
 	return &Tree{
-		Root: NewNode(true),
+		Root:  NewNode(true),
 		Count: 0,
 	}
 }
@@ -45,7 +45,7 @@ func (node *Node) Insert(key string, data interface{}) (bool, Element, *Node, *N
 		}
 		if len(node.Elements) == 0 {
 			node.Elements = []Element{Element{
-				Key: key,
+				Key:  key,
 				Data: data,
 			}}
 			node.N += 1
@@ -94,7 +94,7 @@ func (node *Node) Insert(key string, data interface{}) (bool, Element, *Node, *N
 				leftPart := make([]Element, index+1)
 				copy(leftPart, node.Elements[:index])
 				leftPart[index] = Element{
-					Key: key,
+					Key:  key,
 					Data: data,
 				}
 				node.Elements = append(leftPart, node.Elements[index:]...)
@@ -106,7 +106,7 @@ func (node *Node) Insert(key string, data interface{}) (bool, Element, *Node, *N
 		}
 		if key > node.Elements[len(node.Elements)-1].Key {
 			node.Elements = append(node.Elements, Element{
-				Key: key,
+				Key:  key,
 				Data: data,
 			})
 			node.N += 1
@@ -122,13 +122,13 @@ func (node *Node) Insert(key string, data interface{}) (bool, Element, *Node, *N
 func (node *Node) Split() (Element, *Node, *Node) {
 	// fmt.Println("Split!")
 	newLeftNode := &Node{
-		N:        node.N/2,
+		N:        node.N / 2,
 		Leaf:     node.Leaf,
 		Elements: make([]Element, node.N/2),
 		Nodes:    make([]*Node, node.N/2),
 	}
 	newRightNode := &Node{
-		N:        node.N-node.N/2-1,
+		N:        node.N - node.N/2 - 1,
 		Leaf:     node.Leaf,
 		Elements: make([]Element, node.N-node.N/2-1),
 		Nodes:    make([]*Node, node.N-node.N/2+1),
@@ -185,7 +185,7 @@ func (node *Node) Search(key string) interface{} {
 		return nil
 	}
 	left := 0
-	right := node.N-1
+	right := node.N - 1
 	if node.Elements[left].Key > key {
 		if !node.Leaf {
 			return node.Nodes[0].Search(key)
@@ -210,11 +210,11 @@ func (node *Node) Search(key string) interface{} {
 				return nil
 			}
 		} else {
-			mid := (left+right)/2
+			mid := (left + right) / 2
 			if node.Elements[mid].Key == key {
 				return node.Elements[mid].Data
 			} else if node.Elements[mid].Key < key {
-				left = mid 
+				left = mid
 			} else {
 				right = mid
 			}

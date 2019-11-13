@@ -8,7 +8,7 @@ import (
 func QueueTest() {
 	fmt.Println("------", "Queue Test:")
 	classicQueue := new(queue.Queue)
-	for i:=0; i<10; i++ {
+	for i := 0; i < 10; i++ {
 		fmt.Printf("%d ", i)
 		classicQueue.Push(queue.Type(i))
 	}
@@ -22,7 +22,7 @@ func QueueTest() {
 	fmt.Println("------", "ChannelQueue Test:")
 	channelQueue := new(queue.ChannelQueue)
 	channelQueue.Inter = make(chan queue.Type, 1)
-	for i:=0; i<10; i++ {
+	for i := 0; i < 10; i++ {
 		channelQueue.Push(queue.Type(i))
 	}
 	for !channelQueue.Empty() {

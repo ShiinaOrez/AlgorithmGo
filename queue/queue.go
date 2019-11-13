@@ -1,17 +1,17 @@
 package queue
 
 import (
-	_"fmt"
+	_ "fmt"
 )
 
-func (queue *Queue) Push (value Type) int {
+func (queue *Queue) Push(value Type) int {
 	newNode := new(QueueNode)
 	newNode.Value = value
 	if (queue.Head == nil) || (queue.Tail == nil) {
 		queue.Head = newNode
 		queue.Tail = newNode
 		queue.Size = 1
-	}else{
+	} else {
 		queue.Tail.Next = newNode
 		queue.Tail = newNode
 		queue.Size += 1
@@ -19,16 +19,16 @@ func (queue *Queue) Push (value Type) int {
 	return queue.Size
 }
 
-func (queue *Queue) Pop () {
+func (queue *Queue) Pop() {
 	if (queue.Head == nil) || (queue.Size == 0) {
-		return 
-	}else{
+		return
+	} else {
 		if (queue.Head == queue.Tail) || (queue.Size == 1) {
 			queue.Head = nil
 			queue.Tail = nil
 			queue.Size = 0
 			return
-		}else{
+		} else {
 			queue.Head = queue.Head.Next
 			queue.Size -= 1
 		}
@@ -36,18 +36,18 @@ func (queue *Queue) Pop () {
 	return
 }
 
-func (queue *Queue) Peek () Type{
+func (queue *Queue) Peek() Type {
 	if (queue.Size > 0) && (queue.Head != nil) {
 		return queue.Head.Value
-	}else{
+	} else {
 		return new(QueueNode).Value
 	}
 }
 
-func (queue *Queue) Empty () bool {
+func (queue *Queue) Empty() bool {
 	if (queue.Size == 0) || (queue.Head == nil) {
 		return true
-	}else{
+	} else {
 		return false
 	}
 }

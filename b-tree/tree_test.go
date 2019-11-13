@@ -1,22 +1,22 @@
 package btree
 
 import (
-	"testing"
 	"fmt"
 	"math/rand"
+	"testing"
 )
 
 func mock(n int) []string {
 	res := []string{}
-	for i:=0; i<100; i++ {
+	for i := 0; i < 100; i++ {
 		b := make([]byte, n)
-   	    for i := range b {
-       		b[i] = letterBytes[rand.Int63() % int64(len(letterBytes))]
-    	}
-    	res = append(res, string(b))		
+		for i := range b {
+			b[i] = letterBytes[rand.Int63()%int64(len(letterBytes))]
+		}
+		res = append(res, string(b))
 	}
 	return res
-} 
+}
 
 func Test(t *testing.T) {
 	tree := NewBTree()

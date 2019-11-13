@@ -9,11 +9,11 @@ func (node *GraphNode) getNode(g *Graph) *GraphNode {
 }
 
 type DijkstraArg interface {
-	getNode( *Graph)   *GraphNode
+	getNode(*Graph) *GraphNode
 }
 
 //func (g *Graph) Dijkstra(from, to DijkstraArg) Type {
 //	source := from.getNode(g)
 //	target := to.getNode(g)
-	
+
 //}

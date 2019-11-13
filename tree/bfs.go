@@ -5,8 +5,8 @@ import (
 )
 
 type BFSNode struct {
-	node    *Node
-	from    int
+	node *Node
+	from int
 }
 
 func (tree *Tree) BFStep(now *Node, queue []BFSNode, index int) ([]BFSNode, error) {
@@ -36,7 +36,7 @@ func (tree *Tree) BFS() ([]*Node, error) {
 	var before = 0
 	var err error
 	queue = append(queue, BFSNode{tree.Root, before})
-	for index<len(queue) {
+	for index < len(queue) {
 		queue, err = tree.BFStep(queue[index].node, queue, index)
 		if err != nil {
 			return nil, err

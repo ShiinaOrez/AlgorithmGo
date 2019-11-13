@@ -1,7 +1,7 @@
 package algorithmtest
 
 func RunTest() {
-    TreeTest()
-    SegmentTreeTest()
-    QueueTest()
+	TreeTest()
+	SegmentTreeTest()
+	QueueTest()
 }

@@ -9,15 +9,15 @@ import (
 type Type typedefs.SegmentTreeType
 
 type Node struct {
-	Range     [2]int
-	Value     Type
-	Left      *Node
-	Right     *Node
-	Father    *Node
+	Range  [2]int
+	Value  Type
+	Left   *Node
+	Right  *Node
+	Father *Node
 }
 
 type SegmentTree struct {
-	Root      *Node
+	Root *Node
 }
 
 func BuildNode() *Node {
@@ -66,7 +66,7 @@ func (tree *SegmentTree) Init(sli []Type) error {
 	if tree.Root == nil {
 		tree.Root = BuildNode()
 	}
-	_, err := tree.Root.Set(nil, sli, [2]int{0, len(sli)-1})
+	_, err := tree.Root.Set(nil, sli, [2]int{0, len(sli) - 1})
 	if err != nil {
 		return err
 	}
@@ -94,14 +94,14 @@ func (node *Node) GetRangeSum(r [2]int) (Type, error) {
 				mid := node.Left.Range[1]
 				if r[0] > mid {
 					return node.Right.GetRangeSum(r)
-				} else if r[1] < mid + 1 {
+				} else if r[1] < mid+1 {
 					return node.Left.GetRangeSum(r)
 				} else {
 					leftSum, err := node.Left.GetRangeSum([2]int{r[0], mid})
 					if err != nil {
 						return 0, err
 					}
-					rightSum, err := node.Right.GetRangeSum([2]int{mid+1, r[1]})
+					rightSum, err := node.Right.GetRangeSum([2]int{mid + 1, r[1]})
 					if err != nil {
 						return 0, err
 					}
@@ -177,7 +177,7 @@ func (node *Node) RangeAddSameValue(r [2]int, value Type) error {
 	if node.Range[0] > r[0] || node.Range[1] < r[1] {
 		return errors.New("[Error]: Out of range!")
 	} else {
-		node.Value += Type((r[1]-r[0]+1) * int(value))
+		node.Value += Type((r[1] - r[0] + 1) * int(value))
 		if node.Range[0] == node.Range[1] {
 			return nil
 		}

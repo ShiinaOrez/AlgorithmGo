@@ -13,11 +13,11 @@ type BSTreeNode struct {
 }
 
 type BSTree struct {
-	Root      *BSTreeNode
-	Size      int
+	Root *BSTreeNode
+	Size int
 }
 
-func BuildNode () *BSTreeNode {
+func BuildNode() *BSTreeNode {
 	return new(BSTreeNode)
 }
 
@@ -31,21 +31,21 @@ func (tree *BSTree) Push(value Type, comp func(Type, Type) bool) int {
 		tree.Root.Value = value
 		tree.Size = 1
 		return tree.Size
-	}else{
+	} else {
 		now := tree.Root
 		for now != nil {
 			if comp(value, now.Value) {
 				if now.LeftNode != nil {
 					now = now.LeftNode
-				}else{
+				} else {
 					now.LeftNode = BuildNode()
 					now.LeftNode.Value = value
 					break
 				}
-			}else{
+			} else {
 				if now.RightNode != nil {
 					now = now.RightNode
-				}else{
+				} else {
 					now.RightNode = BuildNode()
 					now.RightNode.Value = value
 					break
@@ -55,7 +55,7 @@ func (tree *BSTree) Push(value Type, comp func(Type, Type) bool) int {
 		tree.Size += 1
 		return tree.Size
 	}
-}  
+}
 
 func (now *BSTreeNode) Traversal(res []BSTreeNode) []BSTreeNode {
 	if now.LeftNode != nil {
@@ -73,22 +73,22 @@ func (tree *BSTree) Find(target Type, comp func(Type, Type) bool) bool {
 	for now != nil {
 		if now.Value == target {
 			return true
-		}else{
+		} else {
 			if comp(target, now.Value) {
 				now = now.LeftNode
-			}else{
+			} else {
 				now = now.RightNode
 			}
 		}
 	}
 	return false
-} 
+}
 
-func (tree *BSTree) Sort() []Type{
+func (tree *BSTree) Sort() []Type {
 	var res []Type
 	var rv []BSTreeNode
 	rv = tree.Root.Traversal(rv)
-	for _, node := range(rv) {
+	for _, node := range rv {
 		res = append(res, node.Value)
 	}
 	return res

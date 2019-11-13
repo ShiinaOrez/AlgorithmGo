@@ -7,11 +7,11 @@ type BSTreeNode struct {
 }
 
 type BSTree struct {
-	Root      *BSTreeNode
-	Size      int
+	Root *BSTreeNode
+	Size int
 }
 
-func BuildNode () *BSTreeNode {
+func BuildNode() *BSTreeNode {
 	return new(BSTreeNode)
 }
 
@@ -25,21 +25,21 @@ func (tree *BSTree) Push(value *GraphNode) int {
 		tree.Root.Value = value
 		tree.Size = 1
 		return tree.Size
-	}else{
+	} else {
 		now := tree.Root
 		for now != nil {
 			if value.Index < now.Value.Index {
 				if now.LeftNode != nil {
 					now = now.LeftNode
-				}else{
+				} else {
 					now.LeftNode = BuildNode()
 					now.LeftNode.Value = value
 					break
 				}
-			}else{
+			} else {
 				if now.RightNode != nil {
 					now = now.RightNode
-				}else{
+				} else {
 					now.RightNode = BuildNode()
 					now.RightNode.Value = value
 					break
@@ -49,7 +49,7 @@ func (tree *BSTree) Push(value *GraphNode) int {
 		tree.Size += 1
 		return tree.Size
 	}
-}  
+}
 
 func (now *BSTreeNode) Traversal(res []BSTreeNode) []BSTreeNode {
 	if now.LeftNode != nil {
@@ -67,10 +67,10 @@ func (tree *BSTree) Find(index int) *GraphNode {
 	for now != nil {
 		if now.Value.Index == index {
 			return now.Value
-		}else{
+		} else {
 			if index < now.Value.Index {
 				now = now.LeftNode
-			}else{
+			} else {
 				now = now.RightNode
 			}
 		}
